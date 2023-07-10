@@ -18,7 +18,7 @@ addNameBtn.addEventListener('click', addName);
 editNameBtn.addEventListener('click', editName);
 addTaskBtn.addEventListener('click', addTask);
 
-// Functions
+// Functions.
 function addName() {
   name = nameInput.value.trim();
   if (name) {

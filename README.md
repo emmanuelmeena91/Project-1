@@ -1,5 +1,5 @@
 # Project Name
-To-Do-List
+To-Do-List.
 
 This is a simple to-do list app that allows users to add, edit, and delete tasks. Users can enter their name to personalize the app, and the app stores the tasks in the browser's local storage so that they persist across sessions.
 # Usage
