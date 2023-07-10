@@ -123,6 +123,36 @@ label{
 span{
   padding: 20px;
 }
+
+.anim{
+
+animation-duration: 5s;
+animation-iteration-count: 2;
+animation-name: myanimation;
+position: relative;
+
+}
+@keyframes myanimation{
+     0%{right: -120% ;,top: 0px;}
+     25%{right: -100%;, top: 0px }
+     25%{right: -80%;, top: 60px }
+     50%{right: -50%;, top: 0px }
+     75%{right: -30%;, top: 0px }
+     100%{right: -100%;, top: 0px }
+     100%{right: 0px;, top: 0px }
+
+
+
+}
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 768px) {
   body {
     font-size: 14px;
