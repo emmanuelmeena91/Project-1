@@ -13,7 +13,7 @@ const taskList = document.getElementById('task-list');
 let name = '';
 let tasks = [];
 
-// Event listeners
+// Event listeners.
 addNameBtn.addEventListener('click', addName);
 editNameBtn.addEventListener('click', editName);
 addTaskBtn.addEventListener('click', addTask);
