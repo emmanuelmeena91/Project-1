@@ -1,75 +1,84 @@
-// Get DOM elements
-const nameInput = document.getElementById('name-input');
-const addNameBtn = document.getElementById('add-name-btn');
-const nameSection = document.getElementById('name-section');
-const studentName = document.getElementById('student-name');
-const editNameBtn = document.getElementById('edit-name-btn');
-const taskInputSection = document.getElementById('task-input-section');
-const taskInput = document.getElementById('task-input');
-const addTaskBtn = document.getElementById('add-task-btn');
-const taskList = document.getElementById('task-list');
+// Get references to the form elements
+const form = document.getElementById("user-form");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const skillInputs = document.getElementsByName("skill");
+const projectInputs = document.getElementsByName("project");
 
-// State variables.
-let name = '';
-let tasks = [];
+// Get reference to the reset button
+const resetButton = document.getElementById("reset-button");
 
-// Event listeners
-addNameBtn.addEventListener('click', addName);
-editNameBtn.addEventListener('click', editName);
-addTaskBtn.addEventListener('click', addTask);
+// Add event listener for form submission
+form.addEventListener("submit", function(event) {
+  // Prevent the default form submission behavior
+  event.preventDefault();
+  
+  // Get the values from the form inputs
+  const name = nameInput.value;
+  const email = emailInput.value;
+  const skills = [];
+  const projects = [];
 
-// Functions
-function addName() {
-  name = nameInput.value.trim();
-  if (name) {
-    studentName.textContent = name;
-    nameInput.value = '';
-    nameInput.disabled = true;
-    addNameBtn.disabled = true;
-    nameSection.classList.remove('hidden');
-    taskInputSection.classList.remove('hidden');
+  for (let i = 0; i < skillInputs.length; i++) {
+    if (skillInputs[i].checked) {
+      skills.push(skillInputs[i].value);
+    }
   }
-}
 
-function editName() {
-  nameInput.value = name;
-  nameInput.disabled = false;
-  addNameBtn.disabled = false;
-  nameSection.classList.add('hidden');
-  taskInputSection.classList.add('hidden');
-  tasks = [];
-  renderTasks();
-}
-
-function addTask() {
-  const task = taskInput.value.trim();
-  if (task) {
-    tasks.push(task);
-    taskInput.value = '';
-    renderTasks();
+  for (let i = 0; i < projectInputs.length; i++) {
+    if (projectInputs[i].checked) {
+      projects.push(projectInputs[i].value);
+    }
   }
-}
 
-function deleteTask(index) {
-  tasks.splice(index, 1);
-  renderTasks();
-}
+  // Create a new element to display the data
+  const newData = document.createElement("div");
 
-function renderTasks() {
-  taskList.innerHTML = '';
-  tasks.forEach((task, index) => {
-    const taskItem = document.createElement('div');
-    taskItem.classList.add('task-item');
+  // Create and append the heading element
+  const headingElement = document.createElement("h1");
+  headingElement.textContent = "YOUR DETAILS";
+  newData.appendChild(headingElement);
 
-    const taskText = document.createElement('span');
-    taskText.textContent = task;
-    taskItem.appendChild(taskText);
+  // Create and append the name element
+  const nameElement = document.createElement("p");
+  nameElement.textContent = "Name: " + name;
+  newData.appendChild(nameElement);
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.addEventListener('click', () => deleteTask(index));
-    taskItem.appendChild(deleteBtn);
+  // Create and append the email element
+  const emailElement = document.createElement("p");
+  emailElement.textContent = "Email: " + email;
+  newData.appendChild(emailElement);
 
-    taskList.appendChild(taskItem);
-  });
-}
+  // Create and append the skills element
+  const skillsElement = document.createElement("p");
+  skillsElement.textContent = "Skills: " + skills.join(", ");
+  newData.appendChild(skillsElement);
+
+  // Create and append the projects element
+  const projectsElement = document.createElement("p");
+  projectsElement.textContent = "Projects: " + projects.join(", ");
+  newData.appendChild(projectsElement);
+
+  // Get reference to the container for the new data
+  const container = document.getElementById("data-container");
+
+  // Append the new data to the container
+  container.appendChild(newData);
+  
+  // Reset the form
+  form.reset();
+});
+
+// Add event listener for reset button
+resetButton.addEventListener("click", function(event) {
+  // Prevent the default button behavior
+  event.preventDefault();
+  
+  // Get reference to the container for the new data
+  const container = document.getElementById("data-container");
+
+  // Remove all the child elements from the container
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+});
